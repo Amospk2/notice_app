@@ -1,4 +1,4 @@
-# notice_app
+# Notice Flutter App
 
 Projeto de um aplicativo que mostra posts de uma API feito em Flutter/Dart!
 
