@@ -1,6 +1,8 @@
 # Notice Flutter App
 
-Projeto de um aplicativo que mostra posts de uma API feito em Flutter/Dart!
+Projeto de um aplicativo que mostra posts de uma API feito em Flutter/Dart. No projeto utilizei de padrões como: 
+-  Repository Pattern
+-  S.O.L.I.D
 
 ## Conhecendo o projeto
 O aplicativo em questão consome a API e mostra todos os posts que a mesmoa tem. 
