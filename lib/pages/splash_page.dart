@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notice_app/services/prefs_services.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -11,25 +12,35 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2))
-        .then((_) => Navigator.of(context).pushReplacementNamed('/login'));
+    Future.wait([
+      PrefsServices.isAuth(),
+      Future.delayed(const Duration(seconds: 2)),
+      ]).then((value) => value[0] ? Navigator.of(context).pushReplacementNamed('/home')
+    : Navigator.of(context).pushReplacementNamed('/login'));
+    
+
+    
+    
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color.fromARGB(255, 46, 38, 116),
-      child: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset('assets/images/uesb.jpg',
-              height: MediaQuery.of(context).size.height * 0.3,
-              width: MediaQuery.of(context).size.height * 0.3),
-          const CircularProgressIndicator(),
-        ],
-      )),
-    );
+    return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 144, 134, 224),
+        body: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.people,
+                  size: MediaQuery.of(context).size.height * 0.3,
+                ),
+                const CircularProgressIndicator(),
+              ],
+            ),
+          ),
+        ));
   }
 }

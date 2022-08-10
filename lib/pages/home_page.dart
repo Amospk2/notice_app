@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notice_app/components/home/custom_list_posts_component.dart';
 import 'package:notice_app/controllers/home_controller.dart';
+import 'package:notice_app/services/prefs_services.dart';
 
 import '../repositories/home_repository_imp.dart';
 
@@ -23,15 +24,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(
+        title: const Text('Home'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                PrefsServices.logout();
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/login', (_) => true);
+              },
+              icon: const Icon(Icons.logout)),
+        ],
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: ValueListenableBuilder<bool>(
             valueListenable: _controller.postInLoader,
-            builder: (_,inLoader,__)=> 
-              inLoader ? const CircularProgressIndicator() 
-              : CustomListPostsComponent(controller: _controller),
-          ), 
+            builder: (_, inLoader, __) => inLoader
+                ? const CircularProgressIndicator()
+                : CustomListPostsComponent(controller: _controller),
+          ),
         ),
       ),
     );
